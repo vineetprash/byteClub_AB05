@@ -5,9 +5,9 @@ investment decisions.
 - Our project is a Conversational Recommendation System, that is capable of
 communicating with user in fluent natural language about a particular
 investing decision and will provide recommendations for the same. 
-- It compiles all neccessary information about the query in under one tab.
-- User must ultimately take the decision according to their understanding 
-and should not blindly follow the LLM's suggestions.
+- It compiles all appropriate refferences of its replies under one tab for the user to rely on.
+- User is suggested not to blindly follow the LLM's reccomendations before taking any financial decisions.
+  It only provides a high possibility of something happening in the future.
 
 
 
