@@ -27,8 +27,8 @@ function UserChat() {
   const [userQuery, setUserQuery] = useState("");
 
   return (
-    <div className="bg-slate-800 p-4 rounded-lg w-auto text-gray-200">
-      <div id="responseDisplay" className="w-1/2 m-4">
+    <div className="bg-black p-4 rounded-lg text-gray-200 h-max m-8">
+      <div id="responseDisplay" className="m-4">
         <Card>
           <CardHeader>
             <p>LLM's Response</p>
@@ -42,7 +42,7 @@ function UserChat() {
 
       <div
         id="userInput"
-        className="flex w-1/2 flex-row items-center justify-center m-4 "
+        className="flex  flex-row items-center justify-center m-4 "
       >
         <Textarea
           disableAutosize
