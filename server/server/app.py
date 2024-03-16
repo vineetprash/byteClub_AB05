@@ -2,8 +2,32 @@ from transformers import pipeline
 from bs4 import BeautifulSoup as BS
 import requests as req
 from transformers import pipeline
+from prophet import Prophet
+import yfinance as yf
+from prophet.plot import plot_plotly
+
+
+
+def fetch_stock_data(ticker_symbol, start_date, end_date):
+    stock_data = yf.download(ticker_symbol, start=start_date, end=end_date)
+    df = stock_data[['Adj Close']].reset_index()
+    df = df.rename(columns={'Date': 'ds', 'Adj Close': 'y'})
+    return df
+
+# Function to train the Prophet model
+def train_prophet_model(df):
+    model = Prophet()
+    model.fit(df)
+    return model
+
+# Function to make the forecast
+def make_forecast(model, periods):
+    future = model.make_future_dataframe(periods=periods)
+    forecast = model.predict(future)
+    return forecast
+
 sentiment_task = pipeline("sentiment-analysis", model="cardiffnlp/twitter-roberta-base-sentiment-latest", tokenizer="cardiffnlp/twitter-roberta-base-sentiment-latest")
-print(sentiment_task("Covid cases are increasing fast!"))
+
 
 
 # Load the text-to-text generation pipeline
@@ -49,3 +73,14 @@ list.remove(None)
 
 for i in list:
     print(sentiment_task(i))
+
+ticker_symbol = "GOOGL"
+start_date = "2020-01-01"
+end_date = "2024-03-01"
+df = fetch_stock_data(ticker_symbol, start_date, end_date)
+model = train_prophet_model(df)
+forecast = make_forecast(model, 365)
+fig1 = plot_plotly(model, forecast)
+fig1.update_traces(marker=dict(color='red'), line=dict(color='white'))
+fig1.update_layout(title_text='Stock Price Prediction', xaxis_title='Date', yaxis_title='Price')
+fig1.show()
