@@ -4,7 +4,7 @@ import CanvasJSReact from "@canvasjs/react-charts";
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-function StockHistogram() {
+function StockHistogram({ listOfPrices }) {
   const options = {
     animationEnabled: true,
     exportEnabled: true,
@@ -54,12 +54,8 @@ function StockHistogram() {
     ],
   };
   return (
-    <div className="flex items-center h-full w-max justify-center m-4">
-      <div className="w-80 ">
-        <div className=" shadow-xl rounded-lg py-3 p-6 ">
-          <CanvasJSChart options={options} />
-        </div>
-      </div>
+    <div className="flex h-full w-full justify-center items-center m-4">
+      <CanvasJSChart options={options} />
     </div>
   );
 }

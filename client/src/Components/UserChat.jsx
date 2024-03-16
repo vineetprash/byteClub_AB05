@@ -7,40 +7,35 @@ import {
   CardFooter,
   Divider,
   Spacer,
+  CircularProgress,
 } from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import SendIcon from "@mui/icons-material/Send";
 
-const FETCH_ENDPOINT = "";
-const fetchResponse = (url, query, setDisplay) => {
-  // Modify url according to endpoint
-  response = fetch(url)
-    .then((res) => res.json())
-    .then() // Process json response into valid message
-    .catch((e) => console.log("Error handled: ", e));
-
-  setDisplay(response);
-};
-
-function UserChat() {
-  const [displayedResponse, setDisplay] = useState("");
-  const [userQuery, setUserQuery] = useState("");
-
+function UserChat({
+  displayedResponse,
+  setDisplay,
+  userQuery,
+  setUserQuery,
+  fetchResponse,
+  setArticles,
+}) {
+  const [isReceived, setIsReceived] = useState(true);
   return (
-    <div className="bg-black shadow-xl rounded-lg py-3 p-6 w-full h-full my-4">
+    <div className="bg-black shadow-xl  py-3 p-6 w-full h-full my-4 text-white">
       <div id="responseDisplay" className="m-4 h-5/6">
-        {" "}
-        {/* Adjusted height */}
         <div className="flex items-center justify-center h-full">
           <div className="bg-black shadow-xl rounded-lg py-3 p-6 w-full max-h-full">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 h-full">
+            <div className="bg-gray-800 rounded-lg shadow-md p-4 h-full">
               <div className="text-lg font-semibold mb-4">LLM's Response</div>
-              <div className="border-t border-gray-200 dark:border-gray-600 pt-4 h-full overflow-auto">
+              <div className=" dark:border-gray-600 pt-4 h-full overflow-auto">
                 <Textarea
                   readOnly
                   className="w-full h-full  outline-none"
                   value={displayedResponse}
-                  onChange={(e) => setDisplayedResponse(e.target.value)}
+                  onChange={(e) => {
+                    setDisplay(e.target.value);
+                  }}
                 />
               </div>
             </div>
@@ -50,7 +45,7 @@ function UserChat() {
 
       <div
         id="userInput"
-        className="flex  flex-row items-center justify-center m-4 h-1/6 " // Adjusted height
+        className="flex text-white flex-row items-center justify-center m-4 h-1/6 relative bottom-28" // Adjusted height
       >
         <Textarea
           disableAutosize
@@ -63,10 +58,14 @@ function UserChat() {
         />
         <Spacer x={4} />
         <Button
-          onClick={() => console.log("Message Sent")} // fetchResponse
+          onClick={() => {
+            console.log("Message Sent");
+            setIsReceived(false);
+            fetchResponse(userQuery, setDisplay, setIsReceived, setArticles);
+          }} // fetchResponse
           className="aspect-square right-0 w-10 hover:shadow-lg shadow-slate-500 "
         >
-          <SendIcon />
+          {isReceived ? <SendIcon /> : <CircularProgress />}
         </Button>
       </div>
     </div>

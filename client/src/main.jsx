@@ -6,6 +6,7 @@ import Login from "./Routes/Login.jsx";
 import Signup from "./Routes/Signup.jsx";
 import { NextUIProvider } from "@nextui-org/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProfilePage from "./Components/ProfilePage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/profile",
+    element: <ProfilePage />,
   },
 ]);
 

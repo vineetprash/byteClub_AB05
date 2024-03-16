@@ -28,7 +28,7 @@ function NavBar() {
             <Button>Sign Up</Button>
           </Link>
         </NavbarItem>
-        <Link color="foreground" href="/">
+        <Link color="foreground" to="/profile">
           <NavbarItem>
             <div className="rounded-lg bg-slate-100 aspect-square w-8"></div>
           </NavbarItem>
