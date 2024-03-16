@@ -1,10 +1,11 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import UserChatInputBox from "./Components/UserChatInputBox";
 
-function App() {
-  return <></>;
+function App({ className }) {
+  return (
+    <div className={`${className}`}>
+      <UserChatInputBox />
+    </div>
+  );
 }
 
 export default App;
