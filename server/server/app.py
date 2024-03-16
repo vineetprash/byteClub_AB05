@@ -7,6 +7,7 @@ import yfinance as yf
 from prophet.plot import plot_plotly
 import json
 import requests
+import gradio as gr
 
 
 headers = {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDcyMWEzNTMtNTFiMy00ZWVkLWI0MTUtYjUzMmUxMjg2OWJhIiwidHlwZSI6ImFwaV90b2tlbiJ9.B4mU-WmSAAVTW_75fKjbLnsUOfP8LVYpoX0FEe8N_v4"}
@@ -41,14 +42,12 @@ def make_forecast(model, periods):
     forecast = model.predict(future)
     return forecast
 
-def fetch_stock_name():
+def fetch_stock_name(prompt):
     # Example text input
     text = ("I will give you a sentence in natural language "
             "and you will identify which stock i am talking about and return its ticker symbol "
             "return the name of the stock and the ticker symol in the format 'stock_name: ticker_symbol' "
             ". The sentence is:' ")
-
-    prompt = input("Enter the sentence: ")
 
     input_text = text + prompt + "'"
 
@@ -109,7 +108,7 @@ def fetch_news_sentiment(name):
         neu = neu + scores[1]
         pos = pos + scores[2]
 
-    return neg,neu,pos
+    return neg,neu,pos,list
 def make_graph(ticker):
     ticker_symbol = ticker
     start_date = "2020-01-01"
@@ -123,9 +122,9 @@ def make_graph(ticker):
     return fig1
 
 
-def main():
-    name, ticker = fetch_stock_name()
-    neg,neu,pos =fetch_news_sentiment(name)
+def main(prompt):
+    name, ticker = fetch_stock_name(prompt)
+    neg,neu,pos,news =fetch_news_sentiment(name)
     sum = neg+neu+pos
     neg = neg/sum
     neu = neu/sum
@@ -168,8 +167,11 @@ def main():
     response = requests.post(url, json=payload, headers=headers)
     result = json.loads(response.text)
     result = result['openai']['generated_text']
-    print(result)
+    result.strip()
     graph = make_graph(ticker)
-    graph.show()
+    return result,graph,news
 
-main()
+
+demo = gr.Interface(fn=main, inputs=["text"], outputs=["text", "plot", "text"])
+
+demo.launch(share = True)
