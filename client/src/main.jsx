@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import LoginPage from "./Routes/Login.jsx";
-import SignupPage from "./Routes/Signup.jsx";
+import Login from "./Routes/Login.jsx";
+import Signup from "./Routes/Signup.jsx";
 import { NextUIProvider } from "@nextui-org/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -14,11 +14,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <SignupPage />,
+    element: <Signup />,
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: <Login />,
   },
 ]);
 
