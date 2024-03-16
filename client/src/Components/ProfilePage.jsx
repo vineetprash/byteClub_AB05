@@ -2,7 +2,7 @@ import React from "react";
 
 const ProfilePage = () => {
   return (
-    <div className="flex items-center h-screen w-max justify-center m-4">
+    <div className="flex items-center h-full w-max justify-center m-4">
       <div className="w-80 ">
         <div className=" bg-black shadow-xl rounded-lg py-3 p-6">
           <div className="flex justify-evenly items-center">

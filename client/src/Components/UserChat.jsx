@@ -27,43 +27,47 @@ function UserChat() {
   const [userQuery, setUserQuery] = useState("");
 
   return (
-    <div className="flex items-center h-screen w-max justify-center m-4">
-      <div className="w-80 ">
-        <div className="bg-black shadow-xl rounded-lg py-3 p-6 m-4">
-          <div id="responseDisplay" className="m-4">
-            <Card>
-              <CardHeader>
-                <p>LLM's Response</p>
-              </CardHeader>
-              <Divider />
-              <CardBody>
-                <Textarea isReadOnly value={displayedResponse} />
-              </CardBody>
-            </Card>
-          </div>
-
-          <div
-            id="userInput"
-            className="flex  flex-row items-center justify-center m-4 "
-          >
-            <Textarea
-              disableAutosize
-              variant="bordered"
-              placeholder="Type your query"
-              defaultValue="Which stock is trending today?"
-              value={userQuery}
-              onValueChange={setUserQuery}
-              className="w-max-sm"
-            />
-            <Spacer x={4} />
-            <Button
-              onClick={() => console.log("Message Sent")} // fetchResponse
-              className="aspect-square right-0 w-10 hover:shadow-lg shadow-slate-500 "
-            >
-              <SendIcon />
-            </Button>
+    <div className="bg-black shadow-xl rounded-lg py-3 p-6 w-full h-full my-4">
+      <div id="responseDisplay" className="m-4 h-5/6">
+        {" "}
+        {/* Adjusted height */}
+        <div className="flex items-center justify-center h-full">
+          <div className="bg-black shadow-xl rounded-lg py-3 p-6 w-full max-h-full">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 h-full">
+              <div className="text-lg font-semibold mb-4">LLM's Response</div>
+              <div className="border-t border-gray-200 dark:border-gray-600 pt-4 h-full overflow-auto">
+                <Textarea
+                  readOnly
+                  className="w-full h-full  outline-none"
+                  value={displayedResponse}
+                  onChange={(e) => setDisplayedResponse(e.target.value)}
+                />
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+
+      <div
+        id="userInput"
+        className="flex  flex-row items-center justify-center m-4 h-1/6 " // Adjusted height
+      >
+        <Textarea
+          disableAutosize
+          variant="bordered"
+          placeholder="Type your query"
+          defaultValue="Which stock is trending today?"
+          value={userQuery}
+          onValueChange={setUserQuery}
+          className="w-max-sm"
+        />
+        <Spacer x={4} />
+        <Button
+          onClick={() => console.log("Message Sent")} // fetchResponse
+          className="aspect-square right-0 w-10 hover:shadow-lg shadow-slate-500 "
+        >
+          <SendIcon />
+        </Button>
       </div>
     </div>
   );
