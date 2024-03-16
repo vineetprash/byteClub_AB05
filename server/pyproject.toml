@@ -2,6 +2,7 @@
 name = "server"
 version = "0.1.0"
 description = ""
+authors = ['Vineet', 'Tushar', 'Shriniwas', 'Shivam']
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -10,9 +11,10 @@ sqlalchemy = "^2.0.28"
 starlette = "^0.37.2"
 pydantic = "^2.6.4"
 pathlib = "^1.0.1"
-transformers="^4.38.2"
-torch="^2.2.1"
-accelerate="^0.28.0"
+transformers = "^4.38.2"
+torch = "^2.2.1"
+accelerate = "^0.28.0"
+
 
 
 
