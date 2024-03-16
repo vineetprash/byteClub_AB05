@@ -1,11 +1,16 @@
-from transformers import pipeline
 from bs4 import BeautifulSoup as BS
 import requests as req
 from transformers import pipeline
 from prophet import Prophet
 import yfinance as yf
 from prophet.plot import plot_plotly
+import json
+import requests
 
+
+headers = {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDcyMWEzNTMtNTFiMy00ZWVkLWI0MTUtYjUzMmUxMjg2OWJhIiwidHlwZSI6ImFwaV90b2tlbiJ9.B4mU-WmSAAVTW_75fKjbLnsUOfP8LVYpoX0FEe8N_v4"}
+
+url = "https://api.edenai.run/v2/text/generation"
 
 
 def fetch_stock_data(ticker_symbol, start_date, end_date):
@@ -14,13 +19,14 @@ def fetch_stock_data(ticker_symbol, start_date, end_date):
     df = df.rename(columns={'Date': 'ds', 'Adj Close': 'y'})
     return df
 
-# Function to train the Prophet model
+
 def train_prophet_model(df):
     model = Prophet()
     model.fit(df)
     return model
 
-# Function to make the forecast
+
+
 def make_forecast(model, periods):
     future = model.make_future_dataframe(periods=periods)
     forecast = model.predict(future)
@@ -30,23 +36,39 @@ sentiment_task = pipeline("sentiment-analysis", model="cardiffnlp/twitter-robert
 
 
 
-# Load the text-to-text generation pipeline
-text_to_text_pipeline = pipeline("text2text-generation", model="google/flan-t5-small", tokenizer="google/flan-t5-small")
-
-
 # Example text input
 text = ("I will give you a sentence in natural language "
         "and you will identify which stock i am talking about and return its ticker symbol "
+        "return the name of the stock and the ticker symol in the format 'stock_name: ticker_symbol' "
         ". The sentence is:' ")
 
 prompt = input("Enter the sentence: ")
 
 input_text = text + prompt + "'"
 
-# Generate text based on the input
-result = text_to_text_pipeline(input_text, max_length=100, do_sample = True ,temperature=0.5, top_k=50, top_p=0.95, num_return_sequences=1)
+payload = {
+    "providers": "openai,cohere",
+    "text": input_text,
+    "temperature": 0.2,
+    "max_tokens": 250,
+    "fallback_providers": ""
 
-url = f"https://www.businesstoday.in/topic/{result[0]['generated_text']}"
+}
+response = requests.post(url, json=payload, headers=headers)
+
+result = json.loads(response.text)
+result =result['openai']['generated_text']
+name =result.split(":")[0]
+ticker = result.split(":")[1]
+name = name.strip()
+ticker = ticker.strip()
+print(name)
+print(ticker)
+
+
+
+
+url = f"https://www.businesstoday.in/topic/{name.lower()}"
 print(url)
 
 webpage = req.get(url)  # YOU CAN EVEN DIRECTLY PASTE THE URL IN THIS
@@ -72,9 +94,11 @@ for i in list:
 list.remove(None)
 
 for i in list:
-    print(sentiment_task(i))
+    output = sentiment_task(i)
+    print(output)
 
-ticker_symbol = "GOOGL"
+
+ticker_symbol = ticker
 start_date = "2020-01-01"
 end_date = "2024-03-01"
 df = fetch_stock_data(ticker_symbol, start_date, end_date)
