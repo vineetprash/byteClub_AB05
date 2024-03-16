@@ -1,9 +1,9 @@
-import UserChatInputBox from "./Components/UserChatInputBox";
+import UserChat from "./Components/UserChat";
 
 function App({ className }) {
   return (
     <div className={`${className}`}>
-      <UserChatInputBox />
+      <UserChat />
     </div>
   );
 }
