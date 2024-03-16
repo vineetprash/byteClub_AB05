@@ -8,12 +8,13 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 sqlalchemy = "^2.0.28"
-starlette = "^0.37.2"
+starlette = "^0.36.3"
 pydantic = "^2.6.4"
 pathlib = "^1.0.1"
 transformers = "^4.38.2"
 torch = "^2.2.1"
 accelerate = "^0.28.0"
+fastapi = "^0.110.0"
 
 
 
