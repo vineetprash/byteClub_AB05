@@ -27,39 +27,43 @@ function UserChat() {
   const [userQuery, setUserQuery] = useState("");
 
   return (
-    <div className="bg-black p-4 rounded-lg text-gray-200 h-max m-8">
-      <div id="responseDisplay" className="m-4">
-        <Card>
-          <CardHeader>
-            <p>LLM's Response</p>
-          </CardHeader>
-          <Divider />
-          <CardBody>
-            <Textarea isReadOnly value={displayedResponse} />
-          </CardBody>
-        </Card>
-      </div>
+    <div className="flex items-center h-screen w-max justify-center m-4">
+      <div className="w-80 ">
+        <div className="bg-black shadow-xl rounded-lg py-3 p-6 m-4">
+          <div id="responseDisplay" className="m-4">
+            <Card>
+              <CardHeader>
+                <p>LLM's Response</p>
+              </CardHeader>
+              <Divider />
+              <CardBody>
+                <Textarea isReadOnly value={displayedResponse} />
+              </CardBody>
+            </Card>
+          </div>
 
-      <div
-        id="userInput"
-        className="flex  flex-row items-center justify-center m-4 "
-      >
-        <Textarea
-          disableAutosize
-          variant="bordered"
-          placeholder="Type your query"
-          defaultValue="Which stock is trending today?"
-          value={userQuery}
-          onValueChange={setUserQuery}
-          className="w-max-sm"
-        />
-        <Spacer x={4} />
-        <Button
-          onClick={() => console.log("Message Sent")} // fetchResponse
-          className="aspect-square right-0 w-10 hover:shadow-lg shadow-slate-500 "
-        >
-          <SendIcon />
-        </Button>
+          <div
+            id="userInput"
+            className="flex  flex-row items-center justify-center m-4 "
+          >
+            <Textarea
+              disableAutosize
+              variant="bordered"
+              placeholder="Type your query"
+              defaultValue="Which stock is trending today?"
+              value={userQuery}
+              onValueChange={setUserQuery}
+              className="w-max-sm"
+            />
+            <Spacer x={4} />
+            <Button
+              onClick={() => console.log("Message Sent")} // fetchResponse
+              className="aspect-square right-0 w-10 hover:shadow-lg shadow-slate-500 "
+            >
+              <SendIcon />
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

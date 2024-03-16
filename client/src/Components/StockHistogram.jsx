@@ -54,8 +54,12 @@ function StockHistogram() {
     ],
   };
   return (
-    <div id="chartContainer">
-      <CanvasJSChart options={options} />
+    <div className="flex items-center h-screen w-max justify-center m-4">
+      <div className="w-80 ">
+        <div className=" shadow-xl rounded-lg py-3 p-6">
+          <CanvasJSChart options={options} />
+        </div>
+      </div>
     </div>
   );
 }
