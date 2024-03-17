@@ -171,6 +171,6 @@ def main(prompt):
     return result,graph,news
 
 
-demo = gr.Interface(fn=main, inputs=["text"], outputs=["text", "Dataframe", "list"])
+demo = gr.Interface(fn=main, inputs=["text"], outputs=["text", gr.DataFrame(), "text"])
 
 demo.launch(share = True)
