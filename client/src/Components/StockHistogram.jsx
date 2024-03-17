@@ -54,7 +54,7 @@ function StockHistogram({ listOfPrices }) {
     ],
   };
   return (
-    <div className="flex h-full w-full justify-center items-center m-4">
+    <div className="flex h-full w-full justify-center items-center m-4 relative bottom-24">
       <CanvasJSChart options={options} />
     </div>
   );
