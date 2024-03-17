@@ -13,7 +13,7 @@ function Articles({ articles }) {
             isPressable
             isBlurred
             fullWidth
-            className="bg-black text-white h-48 w-96 opacity-80"
+            className="bg-black text-white h-48 w-fit opacity-80"
           >
             <CardHeader>
               <h3>Trending headlines: </h3>
