@@ -3,6 +3,7 @@ import StockHistogram from "./Components/StockHistogram";
 import ProfilePage from "./Components/ProfilePage";
 import NavBar from "./Components/NavBar";
 import Articles from "./Components/Articles";
+import StockHistoryGraph from "./Components/StockHistoryGraph";
 import { client } from "@gradio/client";
 import React from "react";
 import { useState } from "react";
@@ -31,7 +32,10 @@ function App() {
   const [userQuery, setUserQuery] = useState("");
   const [articles, setArticles] = useState([]);
 
-  const [response, setResponse] = useState("");
+  const stockHistoryData = {
+    x: ['2024-03-01', '2024-03-02', '2024-03-03'],
+    y: [100, 110, 105],
+  };
   return (
     <div className="">
       <NavBar />
@@ -45,7 +49,8 @@ function App() {
           </div>
 
           <div id="2" className={`flex h-1/2 m-4 justify-center items-center`}>
-            <StockHistogram />
+            {/* <StockHistogram /> */}
+            <StockHistoryGraph data={stockHistoryData} />
           </div>
         </div>
 

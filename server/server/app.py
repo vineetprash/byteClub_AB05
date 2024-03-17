@@ -116,6 +116,7 @@ def make_graph(ticker):
     df = fetch_stock_data(ticker_symbol, start_date, end_date)
     model = train_prophet_model(df)
     forecast = make_forecast(model, 365)
+    print("Df, model and forecast: ", df, model, forecast)
     fig1 = plot_plotly(model, forecast)
     fig1.update_traces(marker=dict(color='red'), line=dict(color='white'))
     fig1.update_layout(title_text='Stock Price Prediction', xaxis_title='Date', yaxis_title='Price')
