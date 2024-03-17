@@ -109,6 +109,8 @@ def fetch_news_sentiment(name):
         pos = pos + scores[2]
 
     return neg,neu,pos,list
+
+
 def make_graph(ticker):
     ticker_symbol = ticker
     start_date = "2020-01-01"
@@ -116,11 +118,7 @@ def make_graph(ticker):
     df = fetch_stock_data(ticker_symbol, start_date, end_date)
     model = train_prophet_model(df)
     forecast = make_forecast(model, 365)
-    print("Df, model and forecast: ", df, model, forecast)
-    fig1 = plot_plotly(model, forecast)
-    fig1.update_traces(marker=dict(color='red'), line=dict(color='white'))
-    fig1.update_layout(title_text='Stock Price Prediction', xaxis_title='Date', yaxis_title='Price')
-    return fig1
+    return forecast
 
 
 def main(prompt):
@@ -173,6 +171,6 @@ def main(prompt):
     return result,graph,news
 
 
-demo = gr.Interface(fn=main, inputs=["text"], outputs=["text", "plot", "text"])
+demo = gr.Interface(fn=main, inputs=["text"], outputs=["text", gr.DataFrame(), "text"])
 
 demo.launch(share = True)
