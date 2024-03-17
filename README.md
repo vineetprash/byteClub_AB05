@@ -1,6 +1,7 @@
 # byteClub_AB05
 
 ### Video demonstration: https://youtu.be/JT-L1RuaGd4
+<img width="879" alt="image" src="https://github.com/vineetprash/byteClub_AB05/assets/127510994/2f299578-6672-4134-a2bf-2d118d02ee9e">(https://youtu.be/JT-L1RuaGd4)
 
 
 Stock market investors often face the challenge
