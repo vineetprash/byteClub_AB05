@@ -16,15 +16,20 @@ async function fetchResponse(
   setIsReceived,
   setArticles,
 ) {
-  console.log("You entered", userQuery);
-  const app = await client("http://127.0.0.1:7860/");
-  const result = await app.predict("/predict", [
-    [`${userQuery}`], // string  in 'prompt' Textbox component
-  ]);
-  console.log(`Result: `, result.data);
-  setDisplay(result.data[0]);
-  setIsReceived(true);
-  setArticles(result.data[2]);
+  try {
+    console.log("You entered", userQuery);
+    const app = await client("http://127.0.0.1:7860/");
+    const result = await app.predict("/predict", [
+      [`${userQuery}`], // string  in 'prompt' Textbox component
+    ]);
+    console.log(`Result: `, result.data);
+    console.log(`Result: `, result.data[1]);
+    setDisplay(result.data[0]);
+    setIsReceived(true);
+    setArticles(result.data[2]);
+  } catch (error) {
+    console.log("Error handled: ", error);
+  }
 }
 
 function App() {
@@ -33,7 +38,7 @@ function App() {
   const [articles, setArticles] = useState([]);
 
   const stockHistoryData = {
-    x: ['2024-03-01', '2024-03-02', '2024-03-03'],
+    x: ["2024-03-01", "2024-03-02", "2024-03-03"],
     y: [100, 110, 105],
   };
   return (
