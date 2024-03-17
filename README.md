@@ -6,7 +6,7 @@ investment decisions.
 communicating with user in fluent natural language about a particular
 investing decision and provides recommendations for the same. 
 - USP: Besides natural language output, this project also provides a graphical representation of stock prices.
-  along with prediction of future growth of the stock.
+  along with prediction of future growth of the stock. <br>
   <img width="354" alt="image" src="https://github.com/vineetprash/byteClub_AB05/assets/127510994/85094cff-80a6-469d-b93e-5354f9b5ff6d">
 - It also provides trending headlines related to the prompt given by the user.
 
