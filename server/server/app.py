@@ -44,12 +44,16 @@ def make_forecast(model, periods):
 
 def fetch_stock_name(prompt):
     # Example text input
-    text = ("I will give you a sentence in natural language "
-            "and you will identify which stock i am talking about and return its ticker symbol "
-            "return the name of the stock and the ticker symol in the format 'stock_name: ticker_symbol' "
-            ". The sentence is:' ")
+    text = ("I will provide a sentence enclosed in square brackets '[ ]'."
+            " The sentence will pertain to a stock in the stock market."
+            " Your task is to identify the mentioned stock and return its ticker symbol."
+            " Present the name of the stock along with its ticker symbol in the format 'stock_name: ticker_symbol'."
+            " For example, if the stock mentioned is 'Apple', then the output should be 'Apple: AAPL'."
+            "The sentence is: "
+            )
 
-    input_text = text + prompt + "'"
+
+    input_text = text + prompt + " "
 
     payload = {
         "providers": "openai,cohere",
@@ -174,3 +178,4 @@ def main(prompt):
 demo = gr.Interface(fn=main, inputs=["text"], outputs=["text", gr.DataFrame(), "text"])
 
 demo.launch(share = True)
+
