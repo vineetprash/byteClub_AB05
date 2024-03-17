@@ -22,6 +22,10 @@ investing decision and provides recommendations for the same.
 This project uses React Js frontend and Python backend. We have used gradio to setup a backend api server.
 
 ### Installation
+- Clone repo
+```
+git clone https://github.com/vineetprash/byteClub_AB05.git
+```
 - Client
 ```
 cd client
