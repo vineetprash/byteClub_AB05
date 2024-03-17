@@ -56,10 +56,13 @@ function App() {
     <div className="">
       <NavBar />
       <div
-        className="flex flex-row gap-3 w-full justify-center items-center h-screen bg-zinc-900 overflow-hidden fixed backdrop-blur-sm"
+        className="flex flex-row gap-3  w-full justify-center items-center h-screen bg-zinc-900 overflow-hidden fixed backdrop-blur-sm"
         style={{ backgroundImage: `url(${image})` }}
       >
-        <div id="supportingData" className="flex flex-col h-full w-1/2 ">
+        <div
+          id="supportingData"
+          className="flex flex-col h-full w-1/2 relative left-5"
+        >
           <div id="1" className={`flex h-1/2 m-4 justify-center items-center`}>
             <Articles articles={articles} />
           </div>
