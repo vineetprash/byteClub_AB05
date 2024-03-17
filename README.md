@@ -1,4 +1,8 @@
 # byteClub_AB05
+
+### Video demonstration: https://youtu.be/JT-L1RuaGd4
+<iframe width="736" height="391" src="https://www.youtube.com/embed/JT-L1RuaGd4" title="ByteClub - AlphaByte PS-AB05" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 Stock market investors often face the challenge
 of navigating a vast sea of information to make sound and timely
 investment decisions. 
