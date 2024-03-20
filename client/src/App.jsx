@@ -53,11 +53,13 @@ function App() {
   };
   console.log(articles);
   return (
-    <div className="">
-      <NavBar />
+    <div className="h-screen">
+      <div>
+        <NavBar />
+      </div>
       <div
-        className="flex flex-row gap-3  w-full justify-center items-center h-screen bg-zinc-900 overflow-hidden fixed backdrop-blur-sm"
-        style={{ backgroundImage: `url(${image})` }}
+        className="main flex flex-row gap-3  w-full h-full justify-center items-center pb-16 bg-[#0b161f] overflow-hidden fixed backdrop-blur-sm"
+        // style={{ backgroundImage: `url(${image})` }}
       >
         <div
           id="supportingData"
@@ -75,7 +77,7 @@ function App() {
 
         <div
           id="3"
-          className={`flex w-1/2 h-full m-4 justify-center items-center backdrop-blur-sm`}
+          className={`flex w-1/2 h-full p-4 justify-center items-center backdrop-blur-sm`}
         >
           <UserChat
             displayedResponse={displayedResponse}

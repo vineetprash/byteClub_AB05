@@ -22,63 +22,58 @@ function UserChat({
   setDataframe,
 }) {
   const [isReceived, setIsReceived] = useState(true);
-  return (
-    <div className="bg-black shadow-xl rounded-lg py-3 p-6 w-full h-full m-4 my-4 text-white ">
-      <div id="responseDisplay" className="h-5/6">
-        <div className="flex items-center justify-center h-full">
-          <div className="bg-black shadow-xl rounded-lg p-6 w-full max-h-full opacity-95">
-            <div className="bg-gray-800 rounded-lg shadow-md p-4 h-full border-medium">
-              <div className="text-lg font-semibold mb-4">LLM's Response</div>
-              <div className=" dark:border-gray-600 pt-4 h-full overflow-auto">
-                <Textarea
-                  readOnly
-                  className="w-full h-96 outline-none"
-                  value={displayedResponse}
-                  onChange={(e) => {
-                    setDisplay(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  const [items, setMyItems] = useState([]);
 
-      <div
-        id="userInput"
-        className="flex text-white flex-row items-center justify-center m-4 h-1/6 relative bottom-28" // Adjusted height
-      >
-        <Textarea
-          disableAutosize
-          variant="bordered"
-          placeholder="Type your query"
-          defaultValue="Which stock is trending today?"
-          value={userQuery}
-          onValueChange={setUserQuery}
-          className="w-max-sm"
-        />
-        <Spacer x={4} />
-        <Button
-          onClick={() => {
-            console.log("Message Sent");
-            setIsReceived(false);
-            fetchResponse(
-              userQuery,
-              setDisplay,
-              setIsReceived,
-              setArticles,
-              setDataframe,
-            );
-          }} // fetchResponse
-          className="aspect-square right-0 w-10 hover:shadow-lg shadow-slate-500 "
+  useEffect(() => {
+    setMyItems([...items, displayedResponse]);
+    // localStorage.setItem("items", JSON.stringify(items));
+  }, [displayedResponse]);
+  return (
+    <div className=" a flex flex-col bg-zinc-600 bg-[#082032] rounded-lg  w-full h-full m-4 text-white ">
+      <div className=" b text-lg font-semibold m-4">LLM's Response</div>
+      <Divider />
+      <div className=" c flex flex-col m-4 h-full overflow-hidden">
+        <div className="d m-4 h-5/6    bg-zinc-900 bg-[#0b161f] rounded-lg text-white">
+          {items &&
+            items.map((response) => {
+              <>
+                <p>{response}</p>
+                <Divider />
+              </>;
+            })}
+        </div>
+        <div
+          id="userInput"
+          className="e flex text-white flex-row items-center justify-center mx-4 h-1/6"
         >
-          {isReceived ? <SendIcon /> : <CircularProgress />}
-        </Button>
+          <Textarea
+            disableAutosize
+            radius="sm"
+            variant="bordered"
+            placeholder="Type your query..."
+            className="w-full h-max right"
+          />
+          <Spacer x={4} />
+          <Button
+            onClick={() => {
+              console.log("Message Sent");
+              setIsReceived(false);
+              fetchResponse(
+                userQuery,
+                setDisplay,
+                setIsReceived,
+                setArticles,
+                setDataframe,
+              );
+            }}
+            className="f  hover:shadow-lg shadow-slate-500 "
+          >
+            {isReceived ? <SendIcon /> : <CircularProgress />}
+          </Button>
+        </div>
       </div>
     </div>
   );
 }
 
 export default UserChat;
-
-
