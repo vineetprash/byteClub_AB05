@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.user-chat-bubble {
+  border-radius: 10px 10px 10px 0;
+  position: relative;
+  left: 0;
+}
+
+.ai-chat-bubble {
+  border-radius: 10px 0 10px 10px;
+  position: relative;
+  right: 0;
+}

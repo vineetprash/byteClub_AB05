@@ -12,27 +12,33 @@ import {
 import { Link } from "react-router-dom";
 function NavBar() {
   return (
-    <Navbar className="bg-black text-slate-100">
+    <Navbar className="bg-black text-white opacity-60 h-12">
       <NavbarBrand>
-        <p className="font-bold text-inherit">BYTE CLUB</p>
+        <p className="font-bold text-white">BYTE CLUB</p>
       </NavbarBrand>
 
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
+      <NavbarContent justify="end" className="text-white">
+        <NavbarItem>
           <Link to="/login">
-            <Button>Login</Button>
+            <Button variant="bordered" size="sm" className="text-white">
+              Login
+            </Button>
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link to="/signup">
-            <Button>Sign Up</Button>
+            <Button variant="bordered" size="sm" className="text-white">
+              Sign Up
+            </Button>
           </Link>
         </NavbarItem>
-        <Link color="foreground" to="/profile">
-          <NavbarItem>
-            <div className="rounded-lg bg-slate-100 aspect-square w-8"></div>
-          </NavbarItem>
-        </Link>
+        <NavbarItem>
+          <Link to="/profile">
+            <Button variant="bordered" size="sm" className="text-white">
+              Profile
+            </Button>
+          </Link>
+        </NavbarItem>
       </NavbarContent>
     </Navbar>
   );

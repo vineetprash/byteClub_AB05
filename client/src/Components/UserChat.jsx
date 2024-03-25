@@ -22,24 +22,32 @@ function UserChat({
   setDataframe,
 }) {
   const [isReceived, setIsReceived] = useState(true);
-  const [items, setMyItems] = useState([]);
+  const [responseHistory, setMyResponseHistory] = useState([]);
 
   useEffect(() => {
-    setMyItems([...items, displayedResponse]);
-    // localStorage.setItem("items", JSON.stringify(items));
+    setMyResponseHistory([...responseHistory, displayedResponse]);
   }, [displayedResponse]);
+  console.log("responses : ", responseHistory);
+
   return (
-    <div className=" a flex flex-col bg-zinc-600 bg-[#082032] rounded-lg  w-full h-full m-4 text-white ">
-      <div className=" b text-lg font-semibold m-4">LLM's Response</div>
-      <Divider />
-      <div className=" c flex flex-col m-4 h-full overflow-hidden">
-        <div className="d m-4 h-5/6    bg-zinc-900 bg-[#0b161f] rounded-lg text-white">
-          {items &&
-            items.map((response) => {
-              <>
-                <p>{response}</p>
-                <Divider />
-              </>;
+    <div className=" a flex flex-col shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-lg  w-full h-full m-4 text-slate-400 ">
+      <div className=" b text-lg font-semibold m-1 px-2">LLM's Response</div>
+      <Divider className="divi bg-slate-500" />
+      <div className=" c flex flex-col m-2 h-full overflow-hidden">
+        <div className="d m-2 snap-y h-full scrollbar-thin scrollbar-track-transparent scrollbar-thumb-cyan-700  overflow-auto overflow-x-hidden bg-black  rounded-lg  text-pretty text-sm text-slate-400 p-4">
+          {responseHistory &&
+            responseHistory.map((element, index) => {
+              return (
+                <div key={index}>
+                  <div className="text-start m-1 p-3 bg-teal-900 user-chat-bubble">
+                    {element[0]}
+                  </div>
+                  <div className="text-end m-1 p-3 bg-slate-800 ai-chat-bubble">
+                    {element[1]}
+                  </div>
+                  <Divider className="snap-center" />
+                </div>
+              );
             })}
         </div>
         <div
@@ -49,27 +57,35 @@ function UserChat({
           <Textarea
             disableAutosize
             radius="sm"
-            variant="bordered"
+            variant="underlined"
             placeholder="Type your query..."
-            className="w-full h-max right"
+            className="w-full h-max right  text-white  caret-teal-700"
+            onChange={(e) => setUserQuery(e.target.value)}
+            endContent={
+              <Button
+                isDisabled={false}
+                size="sm"
+                isIconOnly
+                startContent={
+                  isReceived ? <SendIcon /> : <CircularProgress size="sm" />
+                }
+                onClick={() => {
+                  responseHistory.push([userQuery, "random response"]); // temporary random data until api token is changed
+                  console.log("Message Sent");
+                  isReceived ? setIsReceived(false) : setIsReceived(true);
+                  isReceived &&
+                    fetchResponse(
+                      userQuery,
+                      setDisplay,
+                      setIsReceived,
+                      setArticles,
+                      setDataframe,
+                    );
+                }}
+                className="f bg-slate-300 hover:shadow-lg shadow-slate-300 "
+              />
+            }
           />
-          <Spacer x={4} />
-          <Button
-            onClick={() => {
-              console.log("Message Sent");
-              setIsReceived(false);
-              fetchResponse(
-                userQuery,
-                setDisplay,
-                setIsReceived,
-                setArticles,
-                setDataframe,
-              );
-            }}
-            className="f  hover:shadow-lg shadow-slate-500 "
-          >
-            {isReceived ? <SendIcon /> : <CircularProgress />}
-          </Button>
         </div>
       </div>
     </div>

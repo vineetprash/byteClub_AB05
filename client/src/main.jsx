@@ -29,7 +29,7 @@ const router = createBrowserRouter([
 
 const Root = () => {
   return (
-    <NextUIProvider dark>
+    <NextUIProvider>
       <React.StrictMode>
         <RouterProvider router={router} />
       </React.StrictMode>

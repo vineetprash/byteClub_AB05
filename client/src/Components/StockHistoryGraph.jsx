@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Plotly from "plotly.js-dist-min";
+import { Divider } from "@nextui-org/react";
 
 const StockHistoryGraph = ({ dataframe }) => {
   useEffect(() => {
@@ -27,15 +28,24 @@ const StockHistoryGraph = ({ dataframe }) => {
         font: { color: "white" },
       };
 
-      Plotly.newPlot("stock-graph", plotData, layout);
+      Plotly.react("stock-graph", plotData, layout);
     }
   }, [dataframe]);
 
   return (
-    <div
-      id="stock-graph"
-      className="rounded-lg relative bottom-24 opacity-50"
-    ></div>
+    <>
+      {dataframe && (
+        <div
+          id="stock-graph"
+          className="flex text-white p-4 m-4 rounded-lg relative bottom-24 bg-black opacity-50"
+        ></div>
+      )}
+      {!dataframe && (
+        <div className="flex text-white p-4 m-4 rounded-lg relative bottom-24 bg-black opacity-50">
+          <p>Ask a query to generate results</p>
+        </div>
+      )}
+    </>
   );
 };
 
