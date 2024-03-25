@@ -3,8 +3,10 @@ import Plotly from "plotly.js-dist-min";
 import { Divider } from "@nextui-org/react";
 
 const StockHistoryGraph = ({ dataframe }) => {
+  const [hasData, setHasData] = useState(false);
   useEffect(() => {
     if (dataframe !== null && dataframe.data) {
+      setHasData(true);
       // Extract x and y values from dataframe data
       const dx = dataframe.data.map((item) => item[0]);
       const dy = dataframe.data.map((item) => item[18]);
@@ -28,19 +30,18 @@ const StockHistoryGraph = ({ dataframe }) => {
         font: { color: "white" },
       };
 
-      Plotly.react("stock-graph", plotData, layout);
+      Plotly.newPlot("stock-graph", plotData, layout);
     }
   }, [dataframe]);
 
   return (
     <>
-      {dataframe && (
+      {!setHasData ? (
         <div
           id="stock-graph"
           className="flex text-white p-4 m-4 rounded-lg relative bottom-24 bg-black opacity-50"
         ></div>
-      )}
-      {!dataframe && (
+      ) : (
         <div className="flex text-white p-4 m-4 rounded-lg relative bottom-24 bg-black opacity-50">
           <p>Ask a query to generate results</p>
         </div>
