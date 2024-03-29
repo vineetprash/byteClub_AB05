@@ -10,7 +10,7 @@ import requests
 import gradio as gr
 
 
-headers = {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNDcyMWEzNTMtNTFiMy00ZWVkLWI0MTUtYjUzMmUxMjg2OWJhIiwidHlwZSI6ImFwaV90b2tlbiJ9.B4mU-WmSAAVTW_75fKjbLnsUOfP8LVYpoX0FEe8N_v4"}
+headers = {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTA0YmU1ZTYtMjhkMC00MjdiLTk0ZWItNzU3MGFkMmExMjlhIiwidHlwZSI6ImFwaV90b2tlbiJ9.2BKagZKfM80k6dkV03haSqw11885xpilA1NR29My0wI"}
 
 url = "https://api.edenai.run/v2/text/generation"
 
@@ -177,5 +177,5 @@ def main(prompt):
 
 demo = gr.Interface(fn=main, inputs=["text"], outputs=["text", gr.DataFrame(), "text"])
 
-demo.launch(share = True)
+demo.launch()
 
